@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Fiestas de San Roque 2013</title>
+    <meta name="title" content="Fiestas San Roque 2013 - Almonacid de la Cuba">   
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="Robots" content="all" />
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="components/lungo/lungo.css">
+    <link rel="stylesheet" href="components/lungo/lungo.icon.css">
+    <link rel="stylesheet" href="components/lungo/lungo.icon.brand.css">
+    <link rel="stylesheet" href="components/lungo/theme.lungo.css">
+    <script src="js/widgets.js" type="text/javascript"></script>
+
+</head>
+<body class="app">
+    <section id="start">
+        <header data-title="Fiestas de San Roque 2013"></header>
+	    <article id="article-inicio" class="active list indented scroll miarticulo">
+            <ul>
+                <li class="dark"><center><strong>Almonacid de la Cuba <br>del 14 al 18 de Agosto</strong></center></li>
+	        <li><center><img src='img/normal_IMG_5743.JPG' width="280px"></center></li>
+	        <li class="dark"><center><strong>Presione la pantalla para continuar</strong></center></li>
+            </ul>
+        </article>
+    </section>
+    <section id="main" data-transition="">
+        <header data-title="Fiestas San Roque 2013">
+            <nav class="left">
+                <a href="#diasdefiesta" data-router="aside" data-icon="left"></a>
+            </nav>
+        </header>
+	<footer>
+		<nav>
+			<a id="enlace-dias" href="#" data-icon="calendar"></a>
+			<a id="enlace-twitter" href="#" data-icon="brand twitter"></a>
+			<a id="enlace-info" href="#" data-icon="info"></a>
+		</nav>
+	</footer>
+        <article id="article-question" class="list indented scroll miarticulo">
+            <ul>
+                <li class="dark">
+                    <strong>Notas</strong>
+                </li>
+                <li>
+                Esto esta aqui para posibles Notas
+            </ul>
+        </article>	
+        <article id="article-info" class="list indented scroll miarticulo">
+            <ul>
+                <li class="dark">
+                    <strong>Información de Contacto</strong>
+                </li>
+                <li>
+			<strong>Aplicación realizada por David Gimeno.<br><br>Contacto: david@almocuba.com</strong>
+                </li>
+
+                <li><strong>Nota: </strong>Si no puedes cambiar de página, prueba a ir al fondo de la página y pulsar sobre los iconos.</li>
+            </ul>
+        </article>
+        <article id="article-twitter" class="list indented scroll miarticulo">
+            <ul>
+                <li class="clear">
+			<div>
+				<a class="twitter-timeline" data-dnt="false" href="https://twitter.com/search?q=%23AlmoFiestas2013"  data-widget-id="363277087441833984">Tweets sobre "#AlmoFiestas2013"</a>
+
+			</div>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <aside id="diasdefiesta">
+        <header data-title="Días de Fiesta"></header>
+        <article class="active list" id="article-dias">
+            <ul>
+                <li><a href="#dia14" data-router="article" id="diaT14"><strong>14 de Agosto</strong></a></li>
+                <li><a href="#dia15" data-router="article" id="diaT15"><strong>15 de Agosto</strong></a></li>
+                <li><a href="#dia16" data-router="article" id="diaT16"><strong>16 de Agosto</strong></a></li>
+                <li><a href="#dia17" data-router="article" id="diaT17"><strong>17 de Agosto</strong></a></li>
+                <li><a href="#dia18" data-router="article" id="diaT18"><strong>18 de Agosto</strong></a></li>
+            </ul>
+        </article>
+    </aside>
+    <script src="components/quojs/quo.js"></script>
+    <script src="components/lungo/lungo.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="components/handlebars/handlebars.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+	{{#if precio}}<li class="cancel">{{else}}<li>{{/if}}
+	<span class="icon" style="font-size:0.88em;">{{strToHora hora}}</span>
+	{{#if precio}}<div class="right tag cancel">{{precio}}</div>{{/if}}
+	<strong>{{evento}}<br></strong>
+	{{#if precio}}<small>{{observaciones}}<br></small>{{/if}}
+	{{#if lugar}}<small><b>Lugar:</b> {{lugar}}<br></small>{{/if}}
+	{{#if colabora}}<small><b>Colabora:</b> {{colabora}}</small>{{/if}}
+	</li>
+    </script>
+    <script>
+        Lungo.init({ name: 'Fiestas de San Roque 2013' });
+		var mensaje = function(msg){
+			alert(msg);
+		}
+	$(document).ready(function(){
+		var diaActivo;
+		var d = new Date();
+		diaActivo = d.getDay();
+		if( diaActivo < 14 || diaActivo > 18){
+			diaActivo=14;
+		}
+		$("#article-inicio").click(function() {
+			$("#article-days").empty();
+			activardia(diaActivo);
+			$("#diaT"+diaActivo).addClass("active");
+			$("#enlace-dias").addClass("active");
+		});
+		$("#enlace-dias").click(function() {
+			activardia(diaActivo);
+			$("#article-dias").addClass("active");
+			$("#enlace-dias").addClass("active");
+		});
+		$("#enlace-info").click(function() {
+			activardia(null);
+			$("#article-info").addClass("active");
+			$("#enlace-info").addClass("active");
+			Lungo.Router.article("main","article-info");
+		});
+		$("#enlace-twitter").click(function() {
+			activardia(null);
+			$("#article-twitter").addClass("active");
+			$("#enlace-twitter").addClass("active");
+			Lungo.Router.article("main","article-twitter");
+		});
+		$("#enlace-question").click(function() {
+			activardia(null);
+			$("#article-question").addClass("active");
+			$("#enlace-question").addClass("active");
+			Lungo.Router.article("main","article-question");
+		});
+
+		var activardia = function(dia){
+			$("miarticulo").removeClass("active");
+			$("#enlace-dias").removeClass("active");
+			$("#enlace-info").removeClass("active");
+			$("#enlace-twitter").removeClass("active");
+			$("#enlace-question").removeClass("active");
+			if(dia){
+				$("#dia"+dia).addClass("active");
+				diaActivo=dia;
+				Lungo.Router.article("main","dia"+dia);
+			}
+		}
+		$("#diaT14").click(function(){
+			activardia(14);
+			$("#enlace-dias").addClass("active");
+		});
+		$("#diaT15").click(function(){
+			activardia(15);
+			$("#enlace-dias").addClass("active");
+		});
+		$("#diaT16").click(function(){
+			activardia(16);
+			$("#enlace-dias").addClass("active");
+		});
+		$("#diaT17").click(function(){
+			activardia(17);
+			$("#enlace-dias").addClass("active");
+		});
+		$("#diaT18").click(function(){
+			activardia(18);
+			$("#enlace-dias").addClass("active");
+		});
+	}); 
+	// Templates
+        var tmplEvent = Handlebars.compile ($$('#entry-template').html());
+        Handlebars.registerHelper('strToHora', function(hora){ return hora[0] + hora[1] + ":" + hora[2] + hora[3]; });        
+        var parseResponse = function(result){
+            for (var d in result){
+                parseEvents(d, result[d]);
+            }
+	}; 
+        var parseEvents = function(day, events){
+            var html, tmplDay;
+            tmplDay = ''
+                + '<article id="dia' + day + '" class="list indented scroll miarticulo">'
+                + '<ul id=titulo'+day+'></ul>'
+                + '</article>';
+            var $day = $$(tmplDay);
+            // add Day to section#main
+            $$('#main').append($day);
+	    $day.find('ul').append("<li class='dark'><strong>" + day + " de Agosto </strong></li>");
+            for(var i in events){
+                html = tmplEvent( events[i] );
+                $day.find('ul').append(html);
+            }
+            
+            if( day==14){
+		$day.addClass("active");
+            }
+            Lungo.Element.count("#diaT"+day," "+ events.length+" eventos");
+        };
+        // Service
+        Lungo.Service.Settings.async = true;
+        Lungo.Service.Settings.error = function(type, xhr){ mensaje(xhr);};
+        Lungo.Service.Settings.crossDomain = false;
+        Lungo.Service.Settings.timeout = 1000;
+        var url = "fiestas.php";
+        var resp = Lungo.Service.json(url, null, parseResponse);	
+        
+    </script>
+</body>
+</html>
